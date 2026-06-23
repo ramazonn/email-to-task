@@ -9,11 +9,12 @@ This design ensures the webhook remains fast and reliable, while more intensive 
 
 ## Start the app
 
-You will receive `.env` values via Telegram. Place them in `.env` at the project root.
+**Prerequisites:** MongoDB and Redis running locally (defaults in `.env.example`: `localhost:27017`, `localhost:6379`).
+
+You will receive `.env` values via Telegram. Place them in `.env` at the project root (or copy from `.env.example`).
 
 ```bash
 cd backend
-docker compose up -d          # MongoDB + Redis
 npm install
 npm run seed                  # default test data (see below)
 npm run start:dev             # http://localhost:3000
