@@ -1,0 +1,673 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/email/inbound/webhook": {
+      "post": {
+        "operationId": "EmailController_inboundWebhook",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InboundEmailDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "202": {
+            "description": "Inbound email accepted for asynchronous processing"
+          }
+        },
+        "security": [
+          {
+            "basicAuth": []
+          },
+          {
+            "basicAuth": []
+          }
+        ],
+        "summary": "Receive an inbound email webhook payload",
+        "tags": [
+          "email"
+        ]
+      }
+    },
+    "/companies": {
+      "post": {
+        "operationId": "CompanyController_createCompany",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateCompanyDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Company created"
+          }
+        },
+        "security": [
+          {
+            "basicAuth": []
+          },
+          {
+            "basicAuth": []
+          }
+        ],
+        "summary": "Create a company",
+        "tags": [
+          "companies"
+        ]
+      },
+      "get": {
+        "operationId": "CompanyController_listCompanies",
+        "parameters": [
+          {
+            "name": "page",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "minimum": 1,
+              "default": 1,
+              "type": "number"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "minimum": 1,
+              "maximum": 100,
+              "default": 20,
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Paginated company list"
+          }
+        },
+        "security": [
+          {
+            "basicAuth": []
+          },
+          {
+            "basicAuth": []
+          }
+        ],
+        "summary": "List companies",
+        "tags": [
+          "companies"
+        ]
+      }
+    },
+    "/companies/{id}": {
+      "get": {
+        "operationId": "CompanyController_getCompany",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Company details"
+          }
+        },
+        "security": [
+          {
+            "basicAuth": []
+          },
+          {
+            "basicAuth": []
+          }
+        ],
+        "summary": "Get a company by id",
+        "tags": [
+          "companies"
+        ]
+      },
+      "put": {
+        "operationId": "CompanyController_updateCompany",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCompanyDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updated company"
+          }
+        },
+        "security": [
+          {
+            "basicAuth": []
+          },
+          {
+            "basicAuth": []
+          }
+        ],
+        "summary": "Update a company",
+        "tags": [
+          "companies"
+        ]
+      },
+      "delete": {
+        "operationId": "CompanyController_deleteCompany",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Company deleted"
+          }
+        },
+        "security": [
+          {
+            "basicAuth": []
+          },
+          {
+            "basicAuth": []
+          }
+        ],
+        "summary": "Delete a company",
+        "tags": [
+          "companies"
+        ]
+      }
+    },
+    "/users": {
+      "post": {
+        "operationId": "UserController_createUser",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUserDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "User created"
+          }
+        },
+        "security": [
+          {
+            "basicAuth": []
+          },
+          {
+            "basicAuth": []
+          }
+        ],
+        "summary": "Create a user",
+        "tags": [
+          "users"
+        ]
+      },
+      "get": {
+        "operationId": "UserController_listUsers",
+        "parameters": [
+          {
+            "name": "companyId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "example": "665f1b2c3d4e5f6a7b8c9d0e",
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "minimum": 1,
+              "default": 1,
+              "type": "number"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "minimum": 1,
+              "maximum": 100,
+              "default": 20,
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Paginated user list"
+          }
+        },
+        "security": [
+          {
+            "basicAuth": []
+          },
+          {
+            "basicAuth": []
+          }
+        ],
+        "summary": "List users",
+        "tags": [
+          "users"
+        ]
+      }
+    },
+    "/users/{id}": {
+      "get": {
+        "operationId": "UserController_getUser",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User details"
+          }
+        },
+        "security": [
+          {
+            "basicAuth": []
+          },
+          {
+            "basicAuth": []
+          }
+        ],
+        "summary": "Get a user by id",
+        "tags": [
+          "users"
+        ]
+      },
+      "put": {
+        "operationId": "UserController_updateUser",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateUserDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updated user"
+          }
+        },
+        "security": [
+          {
+            "basicAuth": []
+          },
+          {
+            "basicAuth": []
+          }
+        ],
+        "summary": "Update a user",
+        "tags": [
+          "users"
+        ]
+      },
+      "delete": {
+        "operationId": "UserController_deleteUser",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User deleted"
+          }
+        },
+        "security": [
+          {
+            "basicAuth": []
+          },
+          {
+            "basicAuth": []
+          }
+        ],
+        "summary": "Delete a user",
+        "tags": [
+          "users"
+        ]
+      }
+    },
+    "/health": {
+      "get": {
+        "operationId": "HealthController_check",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Dependency connectivity status"
+          }
+        },
+        "summary": "Health check (MongoDB + Redis)",
+        "tags": [
+          "health"
+        ]
+      }
+    },
+    "/tasks": {
+      "get": {
+        "operationId": "TaskController_listTasks",
+        "parameters": [
+          {
+            "name": "status",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "PENDING_REVIEW",
+                "ACCEPTED",
+                "REJECTED"
+              ]
+            }
+          },
+          {
+            "name": "page",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "minimum": 1,
+              "default": 1,
+              "type": "number"
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "minimum": 1,
+              "maximum": 100,
+              "default": 20,
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Paginated tenant task list"
+          }
+        },
+        "security": [
+          {
+            "tenantCompanyApiKey": []
+          }
+        ],
+        "summary": "List tasks for the calling tenant",
+        "tags": [
+          "tasks"
+        ]
+      }
+    },
+    "/tasks/{id}/review": {
+      "post": {
+        "operationId": "TaskController_reviewTask",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReviewTaskDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updated task"
+          }
+        },
+        "security": [
+          {
+            "tenantCompanyApiKey": []
+          }
+        ],
+        "summary": "Accept or reject a pending task",
+        "tags": [
+          "tasks"
+        ]
+      }
+    }
+  },
+  "info": {
+    "title": "Email-to-Task API",
+    "description": "API for ingesting emails and managing tenant-scoped tasks.\n\n**Authorize once (top right):**\n1. `basicAuth` — WEBHOOK_BASIC_AUTH_USER / WEBHOOK_BASIC_AUTH_PASS (webhook, companies, users)\n2. `tenantCompanyApiKey` — company apiKey from seed (`company-1-api-key-test` for Company 1)",
+    "version": "1.0.0",
+    "contact": {}
+  },
+  "tags": [],
+  "servers": [],
+  "components": {
+    "securitySchemes": {
+      "basicAuth": {
+        "type": "http",
+        "scheme": "basic",
+        "description": "Admin/webhook basic auth (WEBHOOK_BASIC_AUTH_USER/PASS)"
+      },
+      "tenantCompanyApiKey": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "x-company-api-key",
+        "description": "Tenant company API key (e.g. company-1-api-key-test after seed)"
+      }
+    },
+    "schemas": {
+      "InboundEmailDto": {
+        "type": "object",
+        "properties": {
+          "providerMessageId": {
+            "type": "string"
+          },
+          "from": {
+            "type": "string"
+          },
+          "to": {
+            "type": "string"
+          },
+          "subject": {
+            "type": "string"
+          },
+          "text": {
+            "type": "string"
+          },
+          "html": {
+            "type": "string"
+          },
+          "receivedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "providerMessageId",
+          "from",
+          "to",
+          "text"
+        ]
+      },
+      "CreateCompanyDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Acme Corp"
+          },
+          "apiKey": {
+            "type": "string",
+            "description": "API key for the company. Auto-generated when omitted.",
+            "example": "cmp_live_abc123"
+          }
+        },
+        "required": [
+          "name"
+        ]
+      },
+      "UpdateCompanyDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Acme Corporation"
+          },
+          "apiKey": {
+            "type": "string",
+            "example": "cmp_live_new_key"
+          }
+        },
+        "required": [
+          "name",
+          "apiKey"
+        ]
+      },
+      "CreateUserDto": {
+        "type": "object",
+        "properties": {
+          "companyId": {
+            "type": "string",
+            "example": "665f1b2c3d4e5f6a7b8c9d0e"
+          },
+          "name": {
+            "type": "string",
+            "example": "Alice Smith"
+          },
+          "emails": {
+            "example": [
+              "alice@acme.example"
+            ],
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "companyId",
+          "name",
+          "emails"
+        ]
+      },
+      "UpdateUserDto": {
+        "type": "object",
+        "properties": {
+          "companyId": {
+            "type": "string",
+            "example": "665f1b2c3d4e5f6a7b8c9d0e"
+          },
+          "name": {
+            "type": "string",
+            "example": "Alice Smith"
+          },
+          "emails": {
+            "example": [
+              "alice@acme.example"
+            ],
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "companyId",
+          "name",
+          "emails"
+        ]
+      },
+      "ReviewTaskDto": {
+        "type": "object",
+        "properties": {
+          "decision": {
+            "type": "string",
+            "enum": [
+              "accept",
+              "reject"
+            ]
+          }
+        },
+        "required": [
+          "decision"
+        ]
+      }
+    }
+  }
+}
