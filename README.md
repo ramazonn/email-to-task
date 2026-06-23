@@ -1,14 +1,20 @@
 # Email-to-Task Pipeline
 
 NestJS service: ingest emails via webhook, classify with OpenAI, create tenant-scoped tasks for human review.
+## How it works
+
+When an inbound email is received (via a POST request to the webhook), the service immediately saves the message and pushes a job onto a queue. This queue is managed by BullMQ, allowing heavy processing tasks (like running OpenAI classification or extracting structured data) to be handled by a background worker process instead of blocking the HTTP request.
+
+This design ensures the webhook remains fast and reliable, while more intensive work (classification, tenant resolution) happens asynchronously in the background. Once the background processor completes its work, actionable emails result in a `Task` being created and marked for human review, all fully scoped to the correct tenant.
 
 ## Start the app
 
-You will receive `.env` values via Telegram. Place them in `.env` at the project root.
+**Prerequisites:** MongoDB and Redis running locally (defaults in `.env.example`: `localhost:27017`, `localhost:6379`).
+
+You will receive `.env` values via Telegram. Place them in `.env` at the project root (or copy from `.env.example`).
 
 ```bash
 cd backend
-docker compose up -d          # MongoDB + Redis
 npm install
 npm run seed                  # default test data (see below)
 npm run start:dev             # http://localhost:3000
