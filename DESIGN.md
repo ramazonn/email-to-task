@@ -40,3 +40,4 @@ GET /tasks + POST /tasks/:id/review  →  tenant via x-company-api-key
 3. PII redaction / data-processing controls before third-party LLM.
 4. Processor + OpenAI integration tests; queue observability dashboard.
 5. SPF/DKIM or signed webhook payloads from email provider.
+6. Implement CI/CD to automate deployment
